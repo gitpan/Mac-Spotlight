@@ -15,3 +15,4 @@ MDItem/typemap
 MDItem/callbacks.c
 MDItem/t/Mac-Spotlight-MDItem.t
 MDItem/lib/Mac/Spotlight/MDItem.pm
+META.yml                                 Module meta-data (added by MakeMaker)
