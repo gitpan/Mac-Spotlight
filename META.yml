@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Mac-Spotlight
-version:            0.02
+version:            0.03
 abstract:           ~
 author:
     - Adrian Hosey <alh@warhound.org>

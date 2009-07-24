@@ -4,9 +4,7 @@
 
 #include "ppport.h"
 
-#include </Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Headers/MDItem.h>
-
-
+#include </System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Headers/MDItem.h>
 
 #define MY_CXT_KEY "Mac::Spotlight::MDItem::_guts" XS_VERSION
 
@@ -37,6 +35,20 @@ BOOT:
     MY_CXT.jumptable = newHV();
 }
 
+MDItemRef
+_new(path)
+    char* path
+CODE:
+    CFStringRef cpath = CFStringCreateWithCString(kCFAllocatorDefault, path, CFStringGetSystemEncoding());
+    RETVAL = MDItemCreate(kCFAllocatorDefault, cpath);
+    CFRelease(cpath);
+OUTPUT:
+    RETVAL
+
+void
+_destroy(MDItemRef item)
+CODE:
+    CFRelease(item);
 
 =item Common MD keys
 =cut
