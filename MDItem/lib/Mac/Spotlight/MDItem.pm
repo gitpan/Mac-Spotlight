@@ -129,7 +129,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'constants'} } );
 
 our @EXPORT = qw();
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 require XSLoader;
 XSLoader::load('Mac::Spotlight::MDItem', $VERSION);
@@ -137,7 +137,7 @@ XSLoader::load('Mac::Spotlight::MDItem', $VERSION);
 sub new {
     my ($class, $path) = @_;
     my $mditem = _new($path) or return;
-    bless { mdiObj => $mditem }, $class;
+    bless { mdiObj => $mditem, _standalone => 1 }, $class;
 }
 
 sub get {
@@ -147,7 +147,7 @@ sub get {
 
 sub DESTROY {
     my $self = shift;
-    _destroy($self->{mdiObj});
+    _destroy($self->{mdiObj}) if $self->{_standalone};
 }
 
 1;

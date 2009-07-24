@@ -16,7 +16,7 @@ our %EXPORT_TAGS = ( 'constants' => [ qw(
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'constants'} } );
 our @EXPORT = qw();
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 require XSLoader;
 XSLoader::load('Mac::Spotlight::MDQuery', $VERSION);
@@ -64,9 +64,8 @@ sub getResults {
     return _getResults($_[0]->{_qObj});
 }
 
-
 sub DESTROY {
-    _destroy($_[0]->{_qObj});
+    _destroy($_[0]->{_qObj}) if defined $_[0]->{_qObj};
     undef $_[0]->{_scope};
 }
 
